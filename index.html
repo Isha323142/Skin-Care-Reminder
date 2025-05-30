@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlowTime - Skincare Reminder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .highlight {
+      background-color: #fde2e4;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(255, 105, 180, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0); }
+    }
+  </style>
+</head>
+<body class="bg-pink-50 text-pink-900 font-sans">
+  <div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow-xl rounded-2xl">
+    <h1 class="text-3xl font-bold text-center mb-6">💖 GlowTime Reminder</h1>
+    <h2 class="text-xl font-semibold mb-4">Your Daily Skincare Routine</h2>
+    <ul id="routineList" class="space-y-3">
+      <li data-time="07:00">🌞 Face wash cleanser <span class="text-sm text-gray-500">at 07:00</span></li>
+      <li data-time="07:01">🌞 Toner <span class="text-sm text-gray-500">at 07:01</span></li>
+      <li data-time="07:02">🌞 Serum <span class="text-sm text-gray-500">at 07:02</span></li>
+      <li data-time="07:03">🌞 Moisturizer <span class="text-sm text-gray-500">at 07:03</span></li>
+      <li data-time="07:04">🌞 Sunscreen <span class="text-sm text-gray-500">at 07:04</span></li>
+      <li data-time="20:00">🌙 Makeup remover <span class="text-sm text-gray-500">at 20:00</span></li>
+      <li data-time="20:01">🌙 Face wash cleanser <span class="text-sm text-gray-500">at 20:01</span></li>
+      <li data-time="22:00">🌙 Face sheet mask <span class="text-sm text-gray-500">at 22:00</span></li>
+      <li data-time="22:25">🌙 Night cream <span class="text-sm text-gray-500">at 22:25</span></li>
+      <li data-time="22:27">🌙 Lip balm / Under eye cream <span class="text-sm text-gray-500">at 22:27</span></li>
+    </ul>
+    <p class="mt-6 text-center text-sm text-gray-400">Keep this page open to get reminders 💫</p>
+  </div>
+
+  <script>
+    const routineItems = document.querySelectorAll('#routineList li');
+
+    function checkTime() {
+      const now = new Date();
+      const currentTime = now.toTimeString().slice(0, 5); // HH:MM
+
+      routineItems.forEach(item => {
+        const itemTime = item.getAttribute('data-time');
+        if (itemTime === currentTime && !item.classList.contains('highlight')) {
+          item.classList.add('highlight');
+          alert(`✨ Time for: ${item.textContent.trim()}`);
+        }
+      });
+    }
+
+    setInterval(checkTime, 1000);
+  </script>
+</body>
+</html> 
